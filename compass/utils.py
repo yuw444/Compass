@@ -116,6 +116,9 @@ def read_mtx(mtx_file, rows_file, columns_file=None):
     """
     mtx = scipy.io.mmread(mtx_file)
     rows = pd.read_csv(rows_file, sep='\t', header=None)
+    ncols_rows = rows.shape[1]
+    if ncols_rows == 3:
+        rows = rows[0]
     if columns_file is not None:
         columns = pd.read_csv(columns_file, sep='\t', header=None).to_numpy().ravel()
     else:
